@@ -8,3 +8,7 @@ config :geocoder, :worker_pool_config, [
 config :geocoder, :worker, [
   provider: Geocoder.Providers.GoogleMaps # OpenStreetMaps
 ]
+
+config :geocoder, Geocoder.Providers.GoogleMaps, [
+  endpoint: "https://maps.googleapis.com/"
+]

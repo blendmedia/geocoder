@@ -2,8 +2,6 @@ defmodule Geocoder.Providers.GoogleMaps do
   use HTTPoison.Base
   use Towel
 
-  @endpoint "https://maps.googleapis.com/"
-
   def geocode(opts) do
     request("maps/api/geocode/json", extract_opts(opts))
     |> fmap(&parse_geocode/1)
@@ -112,7 +110,8 @@ defmodule Geocoder.Providers.GoogleMaps do
   end
 
   defp process_url(url) do
-    @endpoint <> url
+    endpoint = Application.get_env(:geocoder, __MODULE__)[:endpoint]
+    endpoint <> url
   end
 
   defp process_response_body(body) do
